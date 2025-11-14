@@ -6,9 +6,9 @@ function getComputerChoice()
     else return 'scissors';
 }
 
-function getHumanChoice()
+function getHumanChoice(takechoice)
 {
-    const takechoice =  prompt("Enter rock, paper, or scissors:");
+    
     choice = takechoice.toLowerCase();
     if (choice === 'rock' || choice === 'paper' || choice === 'scissors')
     {
@@ -20,32 +20,63 @@ let hScore = 0;
 let cScore = 0;
 
 
-const hchoice = getHumanChoice();
-const cchoice = getComputerChoice();
+// const hchoice = getHumanChoice();
+// const cchoice = getComputerChoice();
 
 function playRound(hchoice, cchoice)
 {
-    hchoice = hchoice.toLowerCase();
+    hchoice = hchoice.toLowerCase(); 
     cchoice = cchoice.toLowerCase();
 
-    if (hchoice == cchoice) return "Its a tie!";
-    else if(hchoice == 'scissors' && cchoice == 'rock') return hScore++ ;
-    else if(hchoice == 'paper' && cchoice == 'rock') return hScore++ ;
-    else if(hchoice == 'scissors' && cchoice == 'paper') return hScore++ ;
-    else return cScore++ ;
-
-       
-}
-
-function playgame(){
-    for (let i =0  ; i < 5; i++)
-        playRound(hchoice, cchoice);
-
-    if (hScore ==   cScore) {
-        console.log("It's a tie!");
+    if (hchoice == cchoice) {
+        return "It's a tie! Both chose " + hchoice;
     }
-    else if(hScore > cScore){console.log("You WIn");}
-    else {console.log("COmputer Wins");}
+
+    else if (
+        (hchoice === 'rock' && cchoice === 'scissors') ||  // Rock beats Scissors
+        (hchoice === 'paper' && cchoice === 'rock') ||      // Paper beats Rock
+        (hchoice === 'scissors' && cchoice === 'paper')    // Scissors beats Paper
+    ) {
+        hScore++;
+        return `You win! ${hchoice} beats ${cchoice}`;
+    }
+
+    else { 
+        cScore++;
+        return `You lose! ${cchoice} beats ${hchoice}`;
+    }
 }
 
-playgame();
+const startRound = document.querySelector("#buttonsdiv");
+const result = document.querySelector(".resultdiv");
+const resultp = document.createElement("p");
+console.log(result);
+result.appendChild(resultp);
+// result.classList.add("result-round");
+const btn1 = document.querySelector("#rock");                                           
+const btn2 = document.querySelector("#scissors");
+const btn3 = document.querySelector("#paper");
+let hchoice;
+btn2.addEventListener("click", () => {
+    const hchoice = getHumanChoice("scissors");
+    const cchoice = getComputerChoice();
+    playRound(hchoice, cchoice);
+    result.textContent = "Human" + hScore + "Computer" + cScore;
+});
+btn3.addEventListener("click" , () => {
+    const hchoice = getHumanChoice("paper");
+    const cchoice = getComputerChoice();
+    playRound(hchoice, cchoice);
+    result.textContent = "Human" + hScore + "Computer" + cScore;
+});
+startRound.appendChild(btn1, btn2, btn3);
+btn1.addEventListener("click" , () => {
+    const hchoice = getHumanChoice("rock");
+    const cchoice = getComputerChoice();
+    console.log(playRound(hchoice, cchoice));
+    result.textContent = "Human" + hScore + "Computer" + cScore;
+});
+
+
+console.log(hScore);
+console.log(cScore);
