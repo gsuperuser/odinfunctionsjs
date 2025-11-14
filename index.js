@@ -57,26 +57,26 @@ const btn1 = document.querySelector("#rock");
 const btn2 = document.querySelector("#scissors");
 const btn3 = document.querySelector("#paper");
 let hchoice;
-btn2.addEventListener("click", () => {
-    const hchoice = getHumanChoice("scissors");
-    const cchoice = getComputerChoice();
-    playRound(hchoice, cchoice);
-    result.textContent = "Human" + hScore + "Computer" + cScore;
-});
-btn3.addEventListener("click" , () => {
-    const hchoice = getHumanChoice("paper");
-    const cchoice = getComputerChoice();
-    playRound(hchoice, cchoice);
-    result.textContent = "Human" + hScore + "Computer" + cScore;
-});
-startRound.appendChild(btn1, btn2, btn3);
 btn1.addEventListener("click" , () => {
     const hchoice = getHumanChoice("rock");
     const cchoice = getComputerChoice();
     console.log(playRound(hchoice, cchoice));
-    result.textContent = "Human" + hScore + "Computer" + cScore;
+    resultp.textContent = "Human " + hScore + "Computer " + cScore;
 });
 
+btn2.addEventListener("click", () => {
+    const hchoice = getHumanChoice("scissors");
+    const cchoice = getComputerChoice();
+    playRound(hchoice, cchoice);
+    resultp.textContent = "Human " + hScore + "Computer " + cScore;
+});
 
-console.log(hScore);
-console.log(cScore);
+btn3.addEventListener("click" , () => {
+    const hchoice = getHumanChoice("paper");
+    const cchoice = getComputerChoice();
+    playRound(hchoice, cchoice);
+    resultp.textContent = "Human " + hScore + "Computer " + cScore;
+});
+
+startRound.appendChild(btn1, btn2, btn3);
+
