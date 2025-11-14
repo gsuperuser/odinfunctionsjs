@@ -56,7 +56,7 @@ result.appendChild(resultp);
 const btn1 = document.querySelector("#rock");                                           
 const btn2 = document.querySelector("#scissors");
 const btn3 = document.querySelector("#paper");
-let hchoice;
+
 btn1.addEventListener("click" , () => {
     const hchoice = getHumanChoice("rock");
     const cchoice = getComputerChoice();
